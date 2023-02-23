@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 import com.binance.connector.client.impl.SpotClientImpl;
+import org.rainO_o.config.PrivateConfig;
 import org.rainO_o.config.SpringConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,12 +23,14 @@ public final class SingleKline {
 
         System.out.println("Single Kline");
 
-        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(SpringConfig.class);
         /*
         client: create with spring
          */
-//        SpotClientImpl client = new SpotClientImpl(PrivateConfig.API_KEY, PrivateConfig.SECRET_KEY); //old version
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(SpringConfig.class);
+
+//        SpotClientImpl spotClient = new SpotClientImpl(PrivateConfig.API_KEY, PrivateConfig.SECRET_KEY); //old version
         SpotClientImpl spotClient = ctx.getBean(SpotClientImpl.class);
+        System.out.println(spotClient);
 
         /*
         add parameters --> spring
@@ -54,6 +57,8 @@ public final class SingleKline {
             String result = spotClient.createMarket().klines(parameters);
             logger.info(result);
         }
+
+
 
     }
 }
